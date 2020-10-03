@@ -4,7 +4,8 @@ import _ from 'lodash'
 import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
-import { getElementType, getUnhandledProps, useKeyOnly } from '../../lib'
+// eslint-disable-next-line camelcase
+import { deprecated_UIContext, getElementType, getUnhandledProps, useKeyOnly } from '../../lib'
 
 /**
  * An internal icon sub-component for Rating component
@@ -32,10 +33,13 @@ export default class RatingIcon extends Component {
   }
 
   render() {
-    const { active, className, selected } = this.props
+    const { cssFramework } = this.context
+    const { active, className, icon, selected } = this.props
+
     const classes = cx(
       useKeyOnly(active, 'active'),
       useKeyOnly(selected, 'selected'),
+      useKeyOnly(cssFramework === 'fomantic-ui', icon || 'star'),
       'icon',
       className,
     )
@@ -68,6 +72,9 @@ RatingIcon.propTypes = {
   /** An index of icon inside Rating. */
   index: PropTypes.number,
 
+  /** A rating can use a set of star or heart icons. */
+  icon: PropTypes.oneOfType([PropTypes.oneOf(['star', 'heart']), PropTypes.string]),
+
   /**
    * Called on click.
    *
@@ -99,3 +106,6 @@ RatingIcon.propTypes = {
 RatingIcon.defaultProps = {
   as: 'i',
 }
+
+// eslint-disable-next-line camelcase
+RatingIcon.contextType = deprecated_UIContext

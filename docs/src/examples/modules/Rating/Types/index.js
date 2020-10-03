@@ -25,21 +25,6 @@ const RatingTypesExamples = () => (
       description='A rating can be cleared by clicking again.'
       examplePath='modules/Rating/Types/RatingExampleClearable'
     />
-    <ComponentExample
-      title='Disabled'
-      description='A rating can be disabled.'
-      examplePath='modules/Rating/Types/RatingExampleDisabled'
-    />
-    <ComponentExample
-      title='Controlled'
-      description='A rating can be a controlled component.'
-      examplePath='modules/Rating/Types/RatingExampleControlled'
-    />
-    <ComponentExample
-      title='onRate Callback'
-      description='A rating calls back when the rating changes.'
-      examplePath='modules/Rating/Types/RatingExampleOnRate'
-    />
   </ExampleSection>
 )
 

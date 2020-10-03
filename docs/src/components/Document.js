@@ -12,7 +12,7 @@ const Document = ({ Body, children, Head, Html, siteData: { dev, versions } }) =
       <link rel='shortcut icon' type='image/x-icon' href='/logo.png' />
       <link
         rel='stylesheet'
-        href={`https://cdn.jsdelivr.net/npm/semantic-ui@${versions.sui}/dist/semantic.min.css`}
+        href={`https://cdn.jsdelivr.net/npm/fomantic-ui-css@${versions.fui}/semantic.min.css`}
       />
       <link
         rel='stylesheet'

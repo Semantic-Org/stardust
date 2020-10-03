@@ -34,6 +34,9 @@ export leven from './leven'
 export createPaginationItems from './createPaginationItems'
 export * as SUI from './SUI'
 
+// eslint-disable-next-line camelcase
+export { deprecated_UIContext, useCSSFramework } from './UIContext'
+
 export { numberToWordMap, numberToWord } from './numberToWord'
 export normalizeOffset from './normalizeOffset'
 export normalizeTransitionDuration from './normalizeTransitionDuration'

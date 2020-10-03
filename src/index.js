@@ -213,3 +213,7 @@ export Statistic from './views/Statistic'
 export StatisticGroup from './views/Statistic/StatisticGroup'
 export StatisticLabel from './views/Statistic/StatisticLabel'
 export StatisticValue from './views/Statistic/StatisticValue'
+
+// Experimental feature to support multiple CSS integrations
+// eslint-disable-next-line camelcase
+export { unstable_Provider } from './lib/UIContext'

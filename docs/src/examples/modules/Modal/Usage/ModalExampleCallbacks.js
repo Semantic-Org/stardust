@@ -36,7 +36,7 @@ function exampleReducer(state, action) {
   }
 }
 
-function ModalExampleCloseConfig() {
+function ModalExampleCallbacks() {
   const [state, dispatch] = React.useReducer(exampleReducer, {
     log: [],
     open: false,
@@ -119,4 +119,4 @@ function ModalExampleCloseConfig() {
   )
 }
 
-export default ModalExampleCloseConfig
+export default ModalExampleCallbacks

@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import React from 'react'
 
 import {
+  // eslint-disable-next-line camelcase
+  deprecated_UIContext,
   ModernAutoControlledComponent as Component,
   getElementType,
   getUnhandledProps,
@@ -17,7 +19,7 @@ import RatingIcon from './RatingIcon'
  */
 export default class Rating extends Component {
   handleIconClick = (e, { index }) => {
-    const { clearable, disabled, maxRating, onRate } = this.props
+    const { clearable, disabled, maxRating } = this.props
     const { rating } = this.state
     if (disabled) return
 
@@ -33,7 +35,7 @@ export default class Rating extends Component {
 
     // set rating
     this.setState({ rating: newRating, isSelecting: false })
-    if (onRate) onRate(e, { ...this.props, rating: newRating })
+    _.invoke(this.props, 'onRate', e, { ...this.props, rating: newRating })
   }
 
   handleIconMouseEnter = (e, { index }) => {
@@ -51,15 +53,21 @@ export default class Rating extends Component {
   }
 
   render() {
-    const { className, disabled, icon, maxRating, size } = this.props
+    const { cssFramework } = this.context
+    const { className, color, disabled, icon, maxRating, size } = this.props
     const { rating, selectedIndex, isSelecting } = this.state
 
+    const selected = isSelecting && !disabled && selectedIndex >= 0
     const classes = cx(
       'ui',
       icon,
       size,
+      useKeyOnly(
+        cssFramework === 'fomantic-ui',
+        color || (icon === 'star' && 'yellow') || (icon === 'heart' && 'red'),
+      ),
       useKeyOnly(disabled, 'disabled'),
-      useKeyOnly(isSelecting && !disabled && selectedIndex >= 0, 'selected'),
+      useKeyOnly(selected, 'selected'),
       'rating',
       className,
     )
@@ -82,6 +90,7 @@ export default class Rating extends Component {
             aria-posinset={i + 1}
             aria-setsize={maxRating}
             index={i}
+            icon={icon}
             key={i}
             onClick={this.handleIconClick}
             onMouseEnter={this.handleIconMouseEnter}
@@ -107,14 +116,20 @@ Rating.propTypes = {
    */
   clearable: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['auto'])]),
 
+  /** An icon can be colored. Supported only in Fomantic UI. */
+  color: PropTypes.oneOf(SUI.COLORS),
+
   /** The initial rating value. */
   defaultRating: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
   /** You can disable or enable interactive rating.  Makes a read-only rating. */
   disabled: PropTypes.bool,
 
-  /** A rating can use a set of star or heart icons. */
-  icon: PropTypes.oneOf(['star', 'heart']),
+  /**
+   * A rating can use a set of star or heart icons.
+   * A rating can support other icons when integration with Fomantic UI is enabled.
+   */
+  icon: PropTypes.oneOfType([PropTypes.oneOf(['star', 'heart']), PropTypes.string]),
 
   /** The total number of icons. */
   maxRating: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -140,5 +155,8 @@ Rating.defaultProps = {
   clearable: 'auto',
   maxRating: 1,
 }
+
+// eslint-disable-next-line camelcase
+Rating.contextType = deprecated_UIContext
 
 Rating.Icon = RatingIcon
