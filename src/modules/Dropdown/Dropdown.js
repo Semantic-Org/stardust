@@ -1426,7 +1426,9 @@ Dropdown.propTypes = {
 Dropdown.defaultProps = {
   additionLabel: 'Add ',
   additionPosition: 'top',
+  search: true,
   closeOnBlur: true,
+  selection: true,
   closeOnEscape: true,
   deburr: false,
   icon: 'dropdown',
@@ -1435,6 +1437,7 @@ Dropdown.defaultProps = {
   openOnFocus: true,
   renderLabel: renderItemContent,
   searchInput: 'text',
+
   selectOnBlur: true,
   selectOnNavigation: true,
   wrapSelection: true,
