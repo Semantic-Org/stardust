@@ -127,7 +127,7 @@ export interface StrictDropdownProps {
    * @param {SyntheticEvent} event - React's original SyntheticEvent.
    * @param {object} data - All props and the new item's value.
    */
-  onAddItem?: (event: React.KeyboardEvent<HTMLElement>, data: DropdownProps) => void
+  onAddItem?: (event: React.SyntheticEvent<HTMLElement>, data: DropdownProps) => void
 
   /**
    * Called on blur.
@@ -135,7 +135,7 @@ export interface StrictDropdownProps {
    * @param {SyntheticEvent} event - React's original SyntheticEvent.
    * @param {object} data - All props.
    */
-  onBlur?: (event: React.KeyboardEvent<HTMLElement>, data: DropdownProps) => void
+  onBlur?: (event: React.FocusEvent<HTMLElement>, data: DropdownProps) => void
 
   /**
    * Called when the user attempts to change the value.
@@ -151,7 +151,7 @@ export interface StrictDropdownProps {
    * @param {SyntheticEvent} event - React's original SyntheticEvent.
    * @param {object} data - All props.
    */
-  onClick?: (event: React.KeyboardEvent<HTMLElement>, data: DropdownProps) => void
+  onClick?: (event: React.MouseEvent<HTMLElement>, data: DropdownProps) => void
 
   /**
    * Called when a close event happens.
@@ -167,7 +167,7 @@ export interface StrictDropdownProps {
    * @param {SyntheticEvent} event - React's original SyntheticEvent.
    * @param {object} data - All props.
    */
-  onFocus?: (event: React.SyntheticEvent<HTMLElement>, data: DropdownProps) => void
+  onFocus?: (event: React.FocusEvent<HTMLElement>, data: DropdownProps) => void
 
   /**
    * Called when a multi-select label is clicked.
