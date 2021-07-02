@@ -271,8 +271,13 @@ export default class Popup extends Component {
     debug('popper modifiers:', modifiers)
 
     const referenceElement = createReferenceProxy(_.isNil(context) ? this.triggerRef : context)
+    // make sure we mount the Popup to the relevant document.body in case of a new window created with window.open()
+    const mountNodeProp =
+      referenceElement.ref && referenceElement.ref.current
+        ? { mountNode: referenceElement.ref.current.ownerDocument.body }
+        : {}
 
-    const mergedPortalProps = { ...this.getPortalProps(), ...portalRestProps }
+    const mergedPortalProps = { ...this.getPortalProps(), ...portalRestProps, ...mountNodeProp }
     debug('portal props:', mergedPortalProps)
 
     return (
