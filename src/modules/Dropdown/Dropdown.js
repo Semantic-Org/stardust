@@ -275,10 +275,11 @@ export default class Dropdown extends Component {
 
     const item = this.getSelectedItem(selectedIndex)
     const selectedValue = _.get(item, 'value')
+    const disabled = _.get(item, 'disabled')
 
     // prevent selecting null if there was no selected item value
     // prevent selecting duplicate items when the dropdown is closed
-    if (_.isNil(selectedValue) || !open) {
+    if (_.isNil(selectedValue) || !open || disabled) {
       return value
     }
 
