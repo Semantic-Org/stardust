@@ -97,6 +97,13 @@ describe('Table', () => {
       { name: 'Jill', lastName: undefined, status: undefined, notes: undefined },
     ]
 
+    const tableDataWithSameCellContentInSiblingCells = [
+      { name: undefined, status: 'repeat', notes: 'repeat' },
+      { name: 'Jimmy', status: 'Requires Action', notes: undefined },
+      { name: 'Jamie', status: undefined, notes: 'Hostile' },
+      { name: 'Jill', status: undefined, notes: undefined },
+    ]
+
     const renderBodyRowWithSpan = ({ name, lastName, status, notes }, index) => ({
       key: index,
       cells: [
@@ -169,6 +176,14 @@ describe('Table', () => {
       tfoot.should.have.lengthOf(1)
       tfoot.find('tr').should.have.lengthOf(1)
       tfoot.find('tr').find('td').should.have.lengthOf(footerRow.length)
+    })
+
+    it('renders table data with same string content in sibling cells', () => {
+      wrapperMount({
+        headerRow,
+        renderBodyRow,
+        tableData: tableDataWithSameCellContentInSiblingCells,
+      })
     })
   })
 })

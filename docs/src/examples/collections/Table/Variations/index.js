@@ -159,6 +159,18 @@ const Variations = () => (
       examplePath='collections/Table/Variations/TableExampleSmall'
     />
     <ComponentExample examplePath='collections/Table/Variations/TableExampleLarge' />
+
+    <ComponentExample
+      title='TableData'
+      description='A table can receive a JSON object to create body rows.'
+      examplePath='collections/Table/Variations/TableExampleTableData'
+    >
+      <Message info>
+        Using the <code>tableData</code> attribute requires also to define the
+        Tables
+        <code>renderBodyRow</code> attribute.
+      </Message>
+    </ComponentExample>
   </ExampleSection>
 )
 

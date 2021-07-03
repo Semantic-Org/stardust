@@ -59,7 +59,17 @@ function TableRow(props) {
 
   return (
     <ElementType {...rest} className={classes}>
-      {_.map(cells, (cell) => TableCell.create(cell, { defaultProps: { as: cellAs } }))}
+      {_.map(cells, (cell, idx) => {
+        const defaultProps = { as: cellAs }
+
+        // generate a default react key for any string content created cells by this HOC
+        // required due the fact that without this, sibling cells with same content will result in React Same Key Error
+        if (typeof cell === 'string') {
+          defaultProps.key = `${idx}-${cell.toLocaleLowerCase().replace(' ', '-')}`
+        }
+
+        return TableCell.create(cell, { defaultProps })
+      })}
     </ElementType>
   )
 }
