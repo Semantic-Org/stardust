@@ -74,7 +74,7 @@ const dropdownMenuIsOpen = () => {
 
 const nativeEvent = { nativeEvent: { stopImmediatePropagation: _.noop } }
 
-describe('Dropdown', () => {
+describe.only('Dropdown', () => {
   beforeEach(() => {
     attachTo = undefined
     wrapper = undefined
@@ -2177,6 +2177,66 @@ describe('Dropdown', () => {
 
       wrapper.find('input.search').simulate('change', { target: { value: 'baz' } })
       wrapper.should.have.state('selectedIndex', 0)
+    })
+
+    it('retains the selected item after searching with no results', () => {
+      wrapperMount(<Dropdown options={options} selection search />)
+
+      // open the dropdown
+      wrapper.simulate('click')
+      dropdownMenuIsOpen()
+
+      // select the second item in the list
+      wrapper.find('DropdownItem').at(1).simulate('click')
+      wrapper.find('DropdownItem').at(1).should.have.prop('active', true)
+      wrapper.find('DropdownItem').at(1).should.have.prop('selected', true)
+
+      wrapper.find('DropdownItem').at(0).should.have.prop('active', false)
+      wrapper.find('DropdownItem').at(0).should.have.prop('selected', false)
+
+      // search for a non-existent item, triggering the not found message
+      const search = wrapper.find('input.search')
+      search.simulate('change', { target: { value: '__nonExistingSearchQuery__' } })
+
+      // click outside, close the dropdown
+      domEvent.click(document)
+      dropdownMenuIsClosed()
+
+      // next time we open the dropdown, the active item at index 1 should be selected
+      // even though our search query last set the selected index to 0
+      wrapper.simulate('click')
+      dropdownMenuIsOpen()
+
+      wrapper.find('DropdownItem').at(1).should.have.prop('active', true)
+      wrapper.find('DropdownItem').at(1).should.have.prop('selected', true)
+
+      wrapper.find('DropdownItem').at(0).should.have.prop('active', false)
+      wrapper.find('DropdownItem').at(0).should.have.prop('selected', false)
+    })
+
+    it('set right selected index when click on option with search', () => {
+      wrapperMount(<Dropdown options={options} search selection />)
+
+      // avoid testing item index 0, it is selected by default
+      const itemIndex = 1
+
+      // open the menu
+      wrapper.simulate('click')
+      dropdownMenuIsOpen()
+
+      // search for specific item, filtering the list and changing the index order
+      const search = wrapper.find('input.search')
+      search.simulate('change', { target: { value: `${itemIndex}-item` } })
+
+      // click the item
+      wrapper.find('DropdownItem').simulate('click')
+
+      // open the menu again
+      wrapper.simulate('click')
+      dropdownMenuIsOpen()
+
+      // our selectedIndex should match that items index in the full list of items
+      wrapper.state('selectedIndex').should.equal(itemIndex)
     })
 
     it('still allows moving selection after blur/focus', () => {
