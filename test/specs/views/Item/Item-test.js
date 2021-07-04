@@ -33,6 +33,13 @@ describe('Item', () => {
     mapValueToProps: (val) => ({ src: val }),
   })
 
+  common.implementsShorthandProp(Item, {
+    autoGenerateKey: false,
+    propKey: 'content',
+    ShorthandComponent: ItemContent,
+    mapValueToProps: (val) => ({ content: val }),
+  })
+
   describe('content prop', () => {
     it('renders ItemContent component', () => {
       shallow(<Item content={faker.hacker.phrase()} />).should.have.descendants('ItemContent')

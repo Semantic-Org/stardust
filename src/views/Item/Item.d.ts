@@ -1,7 +1,7 @@
 import * as React from 'react'
 
-import { SemanticShorthandContent, SemanticShorthandItem } from '../../generic'
-import ItemContent from './ItemContent'
+import { SemanticShorthandItem } from '../../generic'
+import ItemContent, { ItemContentProps } from './ItemContent'
 import ItemDescription, { ItemDescriptionProps } from './ItemDescription'
 import ItemExtra, { ItemExtraProps } from './ItemExtra'
 import ItemGroup from './ItemGroup'
@@ -24,7 +24,7 @@ export interface StrictItemProps {
   className?: string
 
   /** Shorthand for ItemContent component. */
-  content?: SemanticShorthandContent
+  content?: SemanticShorthandItem<ItemContentProps>
 
   /** Shorthand for ItemDescription component. */
   description?: SemanticShorthandItem<ItemDescriptionProps>

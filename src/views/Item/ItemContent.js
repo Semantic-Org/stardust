@@ -4,6 +4,7 @@ import React from 'react'
 
 import {
   childrenUtils,
+  createShorthandFactory,
   customPropTypes,
   getElementType,
   getUnhandledProps,
@@ -72,5 +73,7 @@ ItemContent.propTypes = {
   /** Content can specify its vertical alignment. */
   verticalAlign: PropTypes.oneOf(SUI.VERTICAL_ALIGNMENTS),
 }
+
+ItemContent.create = createShorthandFactory(ItemContent, (content) => ({ content }))
 
 export default ItemContent

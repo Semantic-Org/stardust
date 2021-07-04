@@ -1,4 +1,5 @@
 import cx from 'clsx'
+import _ from 'lodash'
 import PropTypes from 'prop-types'
 import React from 'react'
 
@@ -29,17 +30,22 @@ function Item(props) {
     )
   }
 
+  let contentShorthandValue = content
+  if (
+    contentShorthandValue === undefined &&
+    [description, extra, header, meta].some((prop) => !_.isNil(prop))
+  ) {
+    contentShorthandValue = {}
+  }
+
   return (
     <ElementType {...rest} className={classes}>
       {ItemImage.create(image, { autoGenerateKey: false })}
 
-      <ItemContent
-        content={content}
-        description={description}
-        extra={extra}
-        header={header}
-        meta={meta}
-      />
+      {ItemContent.create(contentShorthandValue, {
+        autoGenerateKey: false,
+        overrideProps: { description, extra, header, meta },
+      })}
     </ElementType>
   )
 }
@@ -63,7 +69,7 @@ Item.propTypes = {
   className: PropTypes.string,
 
   /** Shorthand for ItemContent component. */
-  content: customPropTypes.contentShorthand,
+  content: customPropTypes.itemShorthand,
 
   /** Shorthand for ItemDescription component. */
   description: customPropTypes.itemShorthand,
