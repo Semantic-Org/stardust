@@ -3,7 +3,7 @@ import { Button, Divider, Form, Grid, Segment } from 'semantic-ui-react'
 
 const DividerExampleVerticalForm = () => (
   <Segment placeholder>
-    <Grid columns={2} relaxed='very' stackable>
+    <Grid columns={3} relaxed='very' stackable>
       <Grid.Column>
         <Form>
           <Form.Input
@@ -18,17 +18,18 @@ const DividerExampleVerticalForm = () => (
             label='Password'
             type='password'
           />
-
           <Button content='Login' primary />
         </Form>
+      </Grid.Column>
+  
+      <Grid.Column>
+        <Divider vertical>Or</Divider>
       </Grid.Column>
 
       <Grid.Column verticalAlign='middle'>
         <Button content='Sign up' icon='signup' size='big' />
       </Grid.Column>
     </Grid>
-
-    <Divider vertical>Or</Divider>
   </Segment>
 )
 
