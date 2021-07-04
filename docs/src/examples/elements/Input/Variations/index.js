@@ -6,6 +6,11 @@ import { Message } from 'semantic-ui-react'
 const InputVariationsExamples = () => (
   <ExampleSection title='Variations'>
     <ComponentExample
+      title='Input Element'
+      description='You can pass props (specially data attributes) to input by including an input element in children.'
+      examplePath='elements/Input/Variations/InputExampleInputElement'
+    />
+    <ComponentExample
       title='Icon'
       description='An input can be formatted with an icon.'
       examplePath='elements/Input/Variations/InputExampleIcon'
