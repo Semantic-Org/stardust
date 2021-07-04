@@ -51,7 +51,7 @@ export interface StrictEmbedProps {
   iframe?: SemanticShorthandItem<HtmlIframeProps>
 
   /**
-   * Сalled on click.
+   * Called on click.
    *
    * @param {SyntheticEvent} event - React's original SyntheticEvent.
    * @param {object} data - All props and proposed value.
