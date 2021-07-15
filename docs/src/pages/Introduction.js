@@ -303,9 +303,9 @@ const Introduction = ({ pkg, title }) => (
         </p>
         <p>
           Take a look at our
-          <a href={`${repoURL}/blob/master/src/lib/AutoControlledComponent.js`}>
+          <a href={`${repoURL}/blob/master/src/lib/ModernAutoControlledComponent.js`}>
             &nbsp;
-            <code>AutoControlledComponent</code>
+            <code>ModernAutoControlledComponent</code>
             &nbsp;
           </a>
           to see how this was done. See the docs try it out live.
